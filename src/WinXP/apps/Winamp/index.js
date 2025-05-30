@@ -12,6 +12,60 @@ const KNOWN_PRESET_URLS_REGEXES = [
   /^https:\/\/s3-us-east-2\.amazonaws\.com\/butterchurn-presets\/.*\.json$/,
 ];
 
+// localStorage wrapper - Custom event dispatch için
+const createStorageWrapper = () => {
+  const originalSetItem = localStorage.setItem;
+
+  localStorage.setItem = function(key, value) {
+    const oldValue = this.getItem(key);
+    originalSetItem.apply(this, arguments);
+
+    // Custom event dispatch et
+    window.dispatchEvent(
+      new CustomEvent('localStorageChange', {
+        detail: { key, newValue: value, oldValue },
+      }),
+    );
+  };
+};
+
+// App başlangıcında wrapper'ı initialize et
+if (typeof window !== 'undefined' && !window.storageWrapperInitialized) {
+  createStorageWrapper();
+  window.storageWrapperInitialized = true;
+}
+
+// Custom hook - optimize edilmiş versiyon
+function useLocalStorageListener(key) {
+  const [value, setValue] = useState(() => localStorage.getItem(key));
+
+  useEffect(() => {
+    // Cross-tab değişiklikler için storage event
+    const handleStorageChange = e => {
+      if (e.key === key) {
+        setValue(e.newValue);
+      }
+    };
+
+    // Aynı tab içi değişiklikler için custom event
+    const handleCustomStorage = e => {
+      if (e.detail.key === key) {
+        setValue(e.detail.newValue);
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('localStorageChange', handleCustomStorage);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('localStorageChange', handleCustomStorage);
+    };
+  }, [key]);
+
+  return value;
+}
+
 function presetNameFromURL(url) {
   try {
     const urlParts = url.split('/');
@@ -259,6 +313,23 @@ function Winamp({ onClose, onMinimize }) {
       }
       setIsReady(false);
     };
+  }, []);
+
+  const skinUrl = useLocalStorageListener('winampSkinUrl');
+
+  useEffect(() => {
+    if (webamp.current && isReady && skinUrl) {
+      webamp.current.setSkinFromUrl(skinUrl);
+    }
+  }, [skinUrl, isReady]);
+
+  useEffect(() => {
+    if (webamp.current && isReady) {
+      const skinUrl = localStorage.getItem('winampSkinUrl');
+      if (skinUrl) {
+        webamp.current.setSkinFromUrl(skinUrl);
+      }
+    }
   }, []);
 
   useEffect(() => {
