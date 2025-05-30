@@ -5,111 +5,171 @@ const album = 'netBloc Vol. 24: tiuqottigeloot';
 export const initialTracks = [
   {
     url:
-      'https://raw.githubusercontent.com/captbaritone/webamp-music/4b556fbf/Diablo_Swing_Orchestra_-_01_-_Heroines.mp3',
-    duration: 322.612245,
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/CEZA%20-%20Neyim%20Var%20ki%20feat.%20Sagopa%20Kajmer.mp3',
+    duration: 207,
     metaData: {
-      title: 'Heroines',
-      artist: 'Diablo Swing Orchestra',
+      title: 'Neyim Var ki feat. Sagopa Kajmer',
+      artist: 'CEZA',
       album,
     },
   },
   {
     url:
-      'https://raw.githubusercontent.com/captbaritone/webamp-music/4b556fbf/Eclectek_-_02_-_We_Are_Going_To_Eclecfunk_Your_Ass.mp3',
-    duration: 190.093061,
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Asl%C4%B1%20Gu%CC%88ngo%CC%88r%20-%20As%CC%A7k%20Hers%CC%A7eye%20Deg%CC%86er.mp3',
+    duration: 224,
     metaData: {
-      title: 'We Are Going To Eclecfunk Your Ass',
-      artist: 'Eclectek',
+      title: 'Aşk Herşeye Değer',
+      artist: 'Aslı Güngör',
       album,
     },
   },
   {
     url:
-      'https://raw.githubusercontent.com/captbaritone/webamp-music/4b556fbf/Auto-Pilot_-_03_-_Seventeen.mp3',
-    duration: 214.622041,
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Asl%C4%B1%20Gu%CC%88ngo%CC%88r-Ferhat%20Go%CC%88c%CC%A7er%20-%20Kalp%20Kalbe%20Kars%CC%A7%C4%B1%20(Sinan%20Akc%CC%A7il%20Mix).mp3',
+    duration: 249,
     metaData: {
-      title: 'Seventeen',
-      artist: 'Auto-Pilot',
+      title: 'Kalp Kalbe Karşı (Sinan Akçil Mix)',
+      artist: 'Aslı Güngör-Ferhat Göçer',
       album,
     },
   },
   {
     url:
-      'https://raw.githubusercontent.com/captbaritone/webamp-music/4b556fbf/Muha_-_04_-_Microphone.mp3',
-    duration: 181.838367,
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Ayc%CC%A7a%20-%20Y%C4%B1k%C4%B1l%C4%B1yo%20(Official%20Video).mp3',
+    duration: 252,
     metaData: {
-      title: 'Microphone',
-      artist: 'Muha',
+      title: 'Yıkılıyo (Official Video)',
+      artist: 'Ayça',
       album,
     },
   },
   {
     url:
-      'https://raw.githubusercontent.com/captbaritone/webamp-music/4b556fbf/Just_Plain_Ant_-_05_-_Stumble.mp3',
-    duration: 86.047347,
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Ayna%20-%20Severek%20Ayr%C4%B1lanlar.mp3',
+    duration: 297,
     metaData: {
-      title: 'Stumble',
-      artist: 'Just Plain Ant',
+      title: 'Severek Ayrılanlar',
+      artist: 'Ayna',
       album,
     },
   },
   {
     url:
-      'https://raw.githubusercontent.com/captbaritone/webamp-music/4b556fbf/Sleaze_-_06_-_God_Damn.mp3',
-    duration: 226.795102,
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Britney%20Spears%20-%20Toxic%20(Official%20HD%20Video).mp3',
+    duration: 212,
     metaData: {
-      title: 'God Damn',
-      artist: 'Sleaze',
+      title: 'Toxic',
+      artist: 'Britney Spears',
       album,
     },
   },
   {
     url:
-      'https://raw.githubusercontent.com/captbaritone/webamp-music/4b556fbf/Juanitos_-_07_-_Hola_Hola_Bossa_Nova.mp3',
-    duration: 207.072653,
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Candan%20Erc%CC%A7etin%20-%20Yalan.mp3',
+    duration: 238,
     metaData: {
-      title: 'Hola Hola Bossa Nova',
-      artist: 'Juanitos',
+      title: 'Yalan',
+      artist: 'Candan Erçetin',
       album,
     },
   },
   {
     url:
-      'https://raw.githubusercontent.com/captbaritone/webamp-music/4b556fbf/Entertainment_for_the_Braindead_-_08_-_Resolutions_Chris_Summer_Remix.mp3',
-    duration: 314.331429,
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/CEZA%20-%20Yerli%20Plaka%20(Official%20Audio).mp3',
+    duration: 275,
     metaData: {
-      title: 'Resolutions (Chris Summer Remix)',
-      artist: 'Entertainment for the Braindead',
+      title: 'Yerli Plaka',
+      artist: 'CEZA',
       album,
     },
   },
   {
     url:
-      'https://raw.githubusercontent.com/captbaritone/webamp-music/4b556fbf/Nobara_Hayakawa_-_09_-_Trail.mp3',
-    duration: 204.042449,
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Davut%20Gu%CC%88log%CC%86lu%20-%20Katula%20Katula.mp3',
+    duration: 238,
     metaData: {
-      title: 'Trail',
-      artist: 'Nobara Hayakawa',
+      title: 'Katula Katula',
+      artist: 'Davut Güloğlu',
       album,
     },
   },
   {
     url:
-      'https://raw.githubusercontent.com/captbaritone/webamp-music/4b556fbf/Paper_Navy_-_10_-_Tongue_Tied.mp3',
-    duration: 201.116735,
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Ebru%20Gu%CC%88ndes%CC%A7%20-%20C%CC%A7ingenem.mp3',
+    duration: 191,
     metaData: {
-      title: 'Tongue Tied',
-      artist: 'Paper Navy',
+      title: 'Çingenem',
+      artist: 'Ebru Gündeş',
       album,
     },
   },
   {
     url:
-      'https://raw.githubusercontent.com/captbaritone/webamp-music/4b556fbf/60_Tigres_-_11_-_Garage.mp3',
-    duration: 245.394286,
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Elvedayla%20su%CC%88slenmis%CC%A7%20bir%20yar%C4%B1n%C4%B1n%20du%CC%88nu%CC%88ndeyim.mp3',
+    duration: 277,
     metaData: {
-      title: 'Garage',
-      artist: '60 Tigres',
+      title: 'Kayıt',
+      artist: 'Elvedayla süslenmiş bir yarının dünündeyim',
+      album,
+    },
+  },
+  {
+    url:
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Belki%20Bir%20Gu%CC%88n%20O%CC%88zlersin.mp3',
+    duration: 277,
+    metaData: {
+      title: 'Belki Bir Gün Özlersin',
+      artist: 'Emre Aydın',
+      album,
+    },
+  },
+  {
+    url:
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Eylem%20-%20Aman%20(Official%20Video).mp3',
+    duration: 198,
+    metaData: {
+      title: 'Aman',
+      artist: 'Eylem',
+      album,
+    },
+  },
+  {
+    url:
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Feridun%20Duzagac%20-%20Beni%20Birakma%20(Video%20Version).mp3',
+    duration: 257,
+    metaData: {
+      title: 'Beni Bırakma',
+      artist: 'Feridun Düzağaç',
+      album,
+    },
+  },
+  {
+    url:
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Go%CC%88khan%20K%C4%B1rdar%20Yerine%20Sevemem%20%20Music%20Video.mp3',
+    duration: 262,
+    metaData: {
+      title: 'Yerine Sevemem',
+      artist: 'Gökhan Kırdar',
+      album,
+    },
+  },
+  {
+    url:
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/Gu%CC%88lay%20-%20Cesaretin%20Var%20m%C4%B1%20As%CC%A7ka.mp3',
+    duration: 214,
+    metaData: {
+      title: 'Cesaretin Var mı Aşka',
+      artist: 'Gülay',
+      album,
+    },
+  },
+  {
+    url:
+      'https://raw.githubusercontent.com/bilalvdemir/winamp-xp/refs/heads/master/demo/mp3/I%CC%87rem%20-%20Hayalet%20Sevgilim%20(Official%20Audio).mp3',
+    duration: 221.44,
+    metaData: {
+      title: 'Hayalet Sevgilim',
+      artist: 'İrem',
       album,
     },
   },
