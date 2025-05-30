@@ -92,22 +92,30 @@ const IconsContainer = styled.div`
   position: absolute;
   margin-top: 40px;
   margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  height: calc(100vh - 80px);
+  gap: 30px 20px;
 `;
 
 const StyledIcon = styled(Icon)`
   width: 70px;
-  margin-bottom: 30px;
+  height: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
   &__text__container {
     width: 100%;
+    height: 32px;
     font-size: 10px;
     color: white;
     text-shadow: 0 1px 1px black;
     margin-top: 5px;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
 
     &:before {
       content: '';
@@ -126,6 +134,13 @@ const StyledIcon = styled(Icon)`
       isFocus && displayFocus ? '#0b61ff' : 'transparent'};
     text-align: center;
     flex-shrink: 1;
+    line-height: 12px;
+    max-height: 24px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
   }
   &__img__container {
     width: 30px;

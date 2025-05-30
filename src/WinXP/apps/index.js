@@ -189,7 +189,7 @@ export const defaultIconState = [
   {
     id: 6,
     icon: winamp,
-    title: 'Skin: Default',
+    title: 'Default',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: base },
@@ -197,7 +197,7 @@ export const defaultIconState = [
   {
     id: 7,
     icon: winamp,
-    title: 'Skin: Winamp Classic',
+    title: 'Winamp Classic',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: classic },
@@ -205,7 +205,7 @@ export const defaultIconState = [
   {
     id: 8,
     icon: winamp,
-    title: 'Skin: Blue Matrix',
+    title: 'Blue Matrix',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: buleMatrix },
@@ -213,7 +213,7 @@ export const defaultIconState = [
   {
     id: 9,
     icon: winamp,
-    title: 'Skin: Green Dimension V2',
+    title: 'Green Dimension',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: green },
@@ -221,7 +221,7 @@ export const defaultIconState = [
   {
     id: 10,
     icon: winamp,
-    title: 'Skin: Internet Archive',
+    title: 'Internet Archive',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: internetArchive },
@@ -229,7 +229,7 @@ export const defaultIconState = [
   {
     id: 11,
     icon: winamp,
-    title: 'Skin: Mac OSX v1.5 (Aqua)',
+    title: 'Mac OSX v1.5',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: osx },
@@ -237,7 +237,7 @@ export const defaultIconState = [
   {
     id: 12,
     icon: winamp,
-    title: 'Skin: Music Forever',
+    title: 'Music Forever',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: musicForever },
@@ -245,7 +245,7 @@ export const defaultIconState = [
   {
     id: 13,
     icon: winamp,
-    title: 'Skin: NeoX',
+    title: 'NeoX',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: neox },
@@ -253,7 +253,7 @@ export const defaultIconState = [
   {
     id: 14,
     icon: winamp,
-    title: 'Skin: Sonic Attitude',
+    title: 'Sonic Attitude',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: sonic },
@@ -261,7 +261,7 @@ export const defaultIconState = [
   {
     id: 15,
     icon: winamp,
-    title: 'Skin: TopazAmp',
+    title: 'TopazAmp',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: topaz },
@@ -269,7 +269,7 @@ export const defaultIconState = [
   {
     id: 16,
     icon: winamp,
-    title: 'Skin: Vizor',
+    title: 'Vizor',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: visor },
@@ -277,7 +277,7 @@ export const defaultIconState = [
   {
     id: 17,
     icon: winamp,
-    title: 'Skin: XMMS Turquoise',
+    title: 'XMMS Turquoise',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: xmms },
@@ -285,7 +285,7 @@ export const defaultIconState = [
   {
     id: 18,
     icon: winamp,
-    title: 'Skin: Sony CDX',
+    title: 'Sony CDX',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: sonyCdx },
@@ -293,7 +293,7 @@ export const defaultIconState = [
   {
     id: 19,
     icon: winamp,
-    title: 'Skin: Zaxon Remake',
+    title: 'Zaxon Remake',
     component: Winamp,
     isFocus: false,
     injectProps: { skin: zaxon },
