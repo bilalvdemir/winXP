@@ -14,7 +14,7 @@ function presetNameFromURL(url) {
   try {
     const urlParts = url.split('/');
     const lastPart = urlParts[urlParts.length - 1];
-    const presetName = lastPart.substring(0, lastPart.length - 5); // remove .milk or .json
+    const presetName = lastPart.substring(0, lastPart.length - 5);
     return decodeURIComponent(presetName);
   } catch (e) {
     console.error(e);
@@ -30,34 +30,88 @@ async function loadButterchurnPresetMapURL(url) {
   });
 }
 
+// Daha agresif preset validation
+function validatePreset(preset, name) {
+  try {
+    if (!preset || typeof preset !== 'object') {
+      console.warn(`❌ Preset ${name}: Invalid structure`);
+      return false;
+    }
+
+    // Temel alanlar kontrolü
+    if (!preset.baseVals) {
+      console.warn(`❌ Preset ${name}: Missing baseVals`);
+      return false;
+    }
+
+    // JavaScript kodu içeren alanları kontrol et
+    const codeFields = ['init_eqs_str', 'frame_eqs_str', 'pixel_eqs_str'];
+
+    for (const field of codeFields) {
+      if (preset[field] && typeof preset[field] === 'string') {
+        const code = preset[field].trim();
+
+        // Boş kod skip et
+        if (code === '') continue;
+
+        try {
+          // Problemli pattern'leri kontrol et
+          if (code.includes('return') && !code.includes('function')) {
+            console.warn(
+              `❌ Preset ${name}: Suspicious return statement in ${field}`,
+            );
+            return false;
+          }
+
+          // Syntax kontrolü
+          new Function('q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', code);
+        } catch (syntaxError) {
+          console.warn(
+            `❌ Preset ${name}: Syntax error in ${field}:`,
+            syntaxError.message,
+          );
+          console.warn(`📝 Problematic code:`, code.substring(0, 200));
+          return false;
+        }
+      }
+    }
+
+    return true;
+  } catch (error) {
+    console.warn(`❌ Preset ${name}: Validation error:`, error.message);
+    return false;
+  }
+}
+
 function Winamp({ onClose, onMinimize }) {
   const ref = useRef(null);
   const webamp = useRef(null);
   const [isReady, setIsReady] = useState(false);
 
-  // Çalışan projedeki exact implementation
   const getButterchurnOptions = (startWithMilkdropHidden = false) => {
+    // Geçici olarak Butterchurn'ü devre dışı bırak
+    const DISABLE_BUTTERCHURN = false; // true yaparak tamamen kapatabilirsin
+
+    if (DISABLE_BUTTERCHURN) {
+      console.log('🚫 Butterchurn disabled for debugging');
+      return null; // Butterchurn olmadan çalıştır
+    }
+
     return {
       importButterchurn: () => {
         console.log('Dynamic importing butterchurn...');
-        return import(
-          /* webpackChunkName: "butterchurn" */
-          'butterchurn'
-        );
+        return import('butterchurn');
       },
       importConvertPreset: () => {
         console.log('Importing preset converter...');
-        return import(
-          /* webpackChunkName: "milkdrop-preset-converter" */
-          'milkdrop-preset-converter-aws'
-        );
+        return import('milkdrop-preset-converter-aws');
       },
       presetConverterEndpoint:
         'https://p2tpeb5v8b.execute-api.us-east-2.amazonaws.com/default/milkdropShaderConverter',
       getPresets: async () => {
-        console.log('Loading presets asynchronously...');
+        console.log('🔄 Loading presets asynchronously...');
 
-        // URL parameter handling (çalışan projedeki gibi)
+        // URL parameter handling
         if ('URLSearchParams' in window) {
           const params = new URLSearchParams(window.location.search);
           const butterchurnPresetUrlParam = params.get('butterchurnPresetUrl');
@@ -101,30 +155,65 @@ function Winamp({ onClose, onMinimize }) {
         }
 
         try {
-          // Default presets yükle - AYNEN çalışan projedeki gibi
-          const presets = await import(
-            /* webpackChunkName: "butterchurn-presets" */
-            'butterchurn-presets'
+          // Default presets yükle
+          const presets = await import('butterchurn-presets');
+          console.log('📦 Presets imported successfully');
+
+          // Güvenli preset listesi - bilinen çalışan preset'ler
+          const safePresets = [
+            'Geiss - Reaction Diffusion 2',
+            'Geiss - Spiral Artifact',
+            'Geiss - Thumb Drum',
+            'martin - acid wiring',
+            'martin - angel flight',
+            'martin - chain breaker',
+            'martin - disco mix 4',
+            'martin - fruit machine',
+            'Flexi - alien fish pond',
+            'Flexi - area 51',
+            'Flexi - mindblob mix',
+            '_Geiss - Artifact 01',
+            '_Geiss - Desert Rose 2',
+            'Rovastar - Oozing Resistance',
+            'Zylot - Star Ornament',
+          ];
+
+          // KRITIK: Sadece güvenli preset'leri yükle
+          const presetArray = Object.entries(presets.default)
+            .map(([name, preset]) => {
+              try {
+                // Sadece güvenli listede olan preset'leri al
+                if (!safePresets.includes(name)) {
+                  console.log(`⏭️ Skipping preset: ${name}`);
+                  return null;
+                }
+
+                // Ek validation
+                if (!validatePreset(preset, name)) {
+                  return null;
+                }
+
+                console.log(`✅ Loading safe preset: ${name}`);
+                return {
+                  name,
+                  butterchurnPresetObject: preset,
+                };
+              } catch (error) {
+                console.error(`❌ Error processing preset ${name}:`, error);
+                return null;
+              }
+            })
+            .filter(Boolean);
+
+          console.log(
+            `✅ Loaded ${presetArray.length} safe presets out of ${
+              Object.keys(presets.default).length
+            } total`,
           );
 
-          console.log('Presets imported successfully');
-
-          // CRITICAL: Çalışan projedeki exact mapping
-          const presetArray = Object.entries(presets.default).map(
-            ([name, preset]) => {
-              return {
-                name,
-                butterchurnPresetObject: preset,
-              };
-            },
-          );
-
-          console.log(`Loaded ${presetArray.length} presets`);
-
-          // TÜM preset'leri döndür, limit koyma!
           return presetArray;
         } catch (error) {
-          console.error('Error loading presets:', error);
+          console.error('❌ Error loading presets:', error);
           return [];
         }
       },
@@ -134,7 +223,7 @@ function Winamp({ onClose, onMinimize }) {
 
   // Milkdrop pencerelerini yeniden konumlandır
   const repositionMilkdropWindows = () => {
-    console.log('Repositioning milkdrop windows...');
+    console.log('🔄 Repositioning milkdrop windows...');
 
     const selectors = [
       '[data-title*="ilkdrop"]',
@@ -152,7 +241,7 @@ function Winamp({ onClose, onMinimize }) {
           element.style.left = '450px';
           element.style.top = '50px';
           element.style.zIndex = '1001';
-          console.log('Milkdrop window repositioned');
+          console.log('✅ Milkdrop window repositioned');
         }
       });
     });
@@ -167,7 +256,7 @@ function Winamp({ onClose, onMinimize }) {
           parent.style.left = '450px';
           parent.style.top = '50px';
           parent.style.zIndex = '1001';
-          console.log('Canvas parent repositioned');
+          console.log('✅ Canvas parent repositioned');
         }
       }
     });
@@ -179,12 +268,12 @@ function Winamp({ onClose, onMinimize }) {
       return;
     }
 
-    console.log('Creating Webamp instance with full preset support...');
+    console.log('🚀 Creating Webamp instance with validated presets...');
 
     webamp.current = new Webamp({
       initialTracks,
       enableHotkeys: true,
-      __butterchurnOptions: getButterchurnOptions(false), // Başlangıçta açık
+      __butterchurnOptions: getButterchurnOptions(false),
       __initialWindowLayout: {
         main: { position: { x: 50, y: 50 } },
         equalizer: { position: { x: 50, y: 166 } },
@@ -198,7 +287,7 @@ function Winamp({ onClose, onMinimize }) {
     webamp.current
       .renderWhenReady(target)
       .then(() => {
-        console.log('Webamp rendered successfully');
+        console.log('✅ Webamp rendered successfully');
         const webampElement = document.querySelector('#webamp');
         if (webampElement) {
           target.appendChild(webampElement);
@@ -211,7 +300,7 @@ function Winamp({ onClose, onMinimize }) {
         }, 1500);
       })
       .catch(error => {
-        console.error('Error rendering Webamp:', error);
+        console.error('❌ Error rendering Webamp:', error);
       });
 
     return () => {
@@ -219,7 +308,7 @@ function Winamp({ onClose, onMinimize }) {
         try {
           webamp.current.dispose();
         } catch (error) {
-          console.error('Error disposing Webamp:', error);
+          console.error('❌ Error disposing Webamp:', error);
         }
         webamp.current = null;
       }

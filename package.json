@@ -5,17 +5,17 @@
   "author": "ShizukuIchi <shizukuichi@gmail.com>",
   "homepage": "https://winxp.now.sh",
   "dependencies": {
-    "butterchurn": "^2.6.7",
-    "butterchurn-presets": "^2.4.7",
+    "butterchurn": "^3.0.0-beta.3",
+    "butterchurn-presets": "3.0.0-beta.4",
     "jszip": "^3.10.1",
     "lodash.samplesize": "^4.2.0",
     "milkdrop-preset-converter-aws": "^0.1.6",
     "music-metadata-browser": "^2.5.11",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
-    "react-use": "^7.0.1",
-    "styled-components": "^4.2.0",
+    "react-use": "^17.4.0",
+    "styled-components": "^6.1.0",
     "webamp": "^1.5.0"
   },
   "scripts": {
