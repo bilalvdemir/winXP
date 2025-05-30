@@ -190,7 +190,7 @@ function Winamp({ onClose, onMinimize }) {
         equalizer: { position: { x: 50, y: 166 } },
         playlist: { position: { x: 50, y: 282 }, size: [0, 4] },
         milkdrop: {
-          position: { left: 0, top: 348 },
+          position: { x: 325, y: 50 },
         },
       },
     });
@@ -292,7 +292,7 @@ function Winamp({ onClose, onMinimize }) {
       />
 
       {/* Milkdrop positioning için global CSS */}
-      <style jsx global>{`
+      <style>{`
         /* Milkdrop window styling */
         [data-title*='ilkdrop'],
         [class*='milkdrop'],
