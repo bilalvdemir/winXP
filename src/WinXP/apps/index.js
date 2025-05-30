@@ -15,6 +15,7 @@ import notepad from 'assets/windowsIcons/327(16x16).png';
 import notepadLarge from 'assets/windowsIcons/327(32x32).png';
 import winamp from 'assets/windowsIcons/winamp.png';
 import paintLarge from 'assets/windowsIcons/680(32x32).png';
+import winampIcon from 'assets/windowsIcons/550(32x32).png';
 import paint from 'assets/windowsIcons/680(16x16).png';
 
 const gen = () => {
@@ -113,29 +114,29 @@ export const defaultAppState = [
 export const defaultIconState = [
   {
     id: 0,
+    icon: computerLarge,
+    title: 'Bilgisayarım',
+    component: MyComputer,
+    isFocus: false,
+  },
+  {
+    id: 1,
     icon: ie,
     title: 'Internet Explorer',
     component: InternetExplorer,
     isFocus: false,
   },
   {
-    id: 1,
-    icon: mine,
-    title: 'Minesweeper',
-    component: Minesweeper,
-    isFocus: false,
-  },
-  {
     id: 2,
-    icon: computerLarge,
-    title: 'My Computer',
-    component: MyComputer,
+    icon: mine,
+    title: 'Mayın Tarlası',
+    component: Minesweeper,
     isFocus: false,
   },
   {
     id: 3,
     icon: notepadLarge,
-    title: 'Notepad',
+    title: 'Not Defteri',
     component: Notepad,
     isFocus: false,
   },
@@ -150,6 +151,20 @@ export const defaultIconState = [
     id: 5,
     icon: paintLarge,
     title: 'Paint',
+    component: Paint,
+    isFocus: false,
+  },
+  {
+    id: 6,
+    icon: winampIcon,
+    title: 'Winamp Default',
+    component: Paint,
+    isFocus: false,
+  },
+  {
+    id: 7,
+    icon: winampIcon,
+    title: 'Winamp Classic',
     component: Paint,
     isFocus: false,
   },

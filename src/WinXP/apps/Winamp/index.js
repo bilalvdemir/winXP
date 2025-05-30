@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Webamp from 'webamp';
 import { initialTracks } from './config';
+import DesktopSkins from './DesktopSkins';
+import { availableSkins } from './availableSkins';
 
 // Çalışan projedeki regex patterns
 const KNOWN_PRESET_URLS_REGEXES = [
@@ -87,6 +89,7 @@ function Winamp({ onClose, onMinimize }) {
   const ref = useRef(null);
   const webamp = useRef(null);
   const [isReady, setIsReady] = useState(false);
+  const [showSkins, setShowSkins] = useState(true);
 
   const getButterchurnOptions = (startWithMilkdropHidden = false) => {
     // Geçici olarak Butterchurn'ü devre dışı bırak
@@ -273,6 +276,7 @@ function Winamp({ onClose, onMinimize }) {
     webamp.current = new Webamp({
       initialTracks,
       enableHotkeys: true,
+      availableSkins, // Skin listesini Webamp'a ekle
       __butterchurnOptions: getButterchurnOptions(false),
       __initialWindowLayout: {
         main: { position: { x: 50, y: 50 } },
@@ -365,6 +369,19 @@ function Winamp({ onClose, onMinimize }) {
     return () => observer.disconnect();
   }, [isReady]);
 
+  // Keyboard shortcut for toggling skins panel
+  useEffect(() => {
+    const handleKeyPress = e => {
+      if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        setShowSkins(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
+
   return (
     <>
       <div
@@ -379,6 +396,30 @@ function Winamp({ onClose, onMinimize }) {
         }}
         ref={ref}
       />
+
+      {/* Desktop Skins Panel */}
+      {isReady && <DesktopSkins webamp={webamp} show={showSkins} />}
+
+      {/* Toggle Button for Skins Panel */}
+      {isReady && (
+        <button
+          onClick={() => setShowSkins(prev => !prev)}
+          style={{
+            position: 'fixed',
+            top: '10px',
+            right: '10px',
+            zIndex: 1003,
+            background: '#c0c0c0',
+            border: '2px outset #c0c0c0',
+            padding: '5px 10px',
+            fontSize: '12px',
+            cursor: 'pointer',
+            borderRadius: '2px',
+          }}
+        >
+          {showSkins ? 'Hide Skins' : 'Show Skins'}
+        </button>
+      )}
 
       {/* Milkdrop positioning için global CSS */}
       <style>{`
@@ -408,6 +449,16 @@ function Winamp({ onClose, onMinimize }) {
         .webamp-window[data-title*='Milkdrop'] {
           border: 2px outset #c0c0c0 !important;
           background: #c0c0c0 !important;
+        }
+
+        /* Desktop icon hover effects */
+        .desktop-icon:hover {
+          background-color: rgba(0, 123, 255, 0.1) !important;
+        }
+
+        .desktop-icon.selected {
+          background-color: rgba(0, 123, 255, 0.3) !important;
+          border: 1px dotted #007bff !important;
         }
       `}</style>
     </>
