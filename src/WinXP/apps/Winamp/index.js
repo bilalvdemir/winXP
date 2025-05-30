@@ -32,59 +32,6 @@ async function loadButterchurnPresetMapURL(url) {
   });
 }
 
-// Daha agresif preset validation
-function validatePreset(preset, name) {
-  try {
-    if (!preset || typeof preset !== 'object') {
-      console.warn(`❌ Preset ${name}: Invalid structure`);
-      return false;
-    }
-
-    // Temel alanlar kontrolü
-    if (!preset.baseVals) {
-      console.warn(`❌ Preset ${name}: Missing baseVals`);
-      return false;
-    }
-
-    // JavaScript kodu içeren alanları kontrol et
-    const codeFields = ['init_eqs_str', 'frame_eqs_str', 'pixel_eqs_str'];
-
-    for (const field of codeFields) {
-      if (preset[field] && typeof preset[field] === 'string') {
-        const code = preset[field].trim();
-
-        // Boş kod skip et
-        if (code === '') continue;
-
-        try {
-          // Problemli pattern'leri kontrol et
-          if (code.includes('return') && !code.includes('function')) {
-            console.warn(
-              `❌ Preset ${name}: Suspicious return statement in ${field}`,
-            );
-            return false;
-          }
-
-          // Syntax kontrolü
-          new Function('q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', code);
-        } catch (syntaxError) {
-          console.warn(
-            `❌ Preset ${name}: Syntax error in ${field}:`,
-            syntaxError.message,
-          );
-          console.warn(`📝 Problematic code:`, code.substring(0, 200));
-          return false;
-        }
-      }
-    }
-
-    return true;
-  } catch (error) {
-    console.warn(`❌ Preset ${name}: Validation error:`, error.message);
-    return false;
-  }
-}
-
 function Winamp({ onClose, onMinimize }) {
   const ref = useRef(null);
   const webamp = useRef(null);
@@ -187,12 +134,6 @@ function Winamp({ onClose, onMinimize }) {
               try {
                 // Sadece güvenli listede olan preset'leri al
                 if (!safePresets.includes(name)) {
-                  console.log(`⏭️ Skipping preset: ${name}`);
-                  return null;
-                }
-
-                // Ek validation
-                if (!validatePreset(preset, name)) {
                   return null;
                 }
 

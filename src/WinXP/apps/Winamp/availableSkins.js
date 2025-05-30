@@ -1,18 +1,18 @@
 // Skin dosyalarını import et
-import buleMatrix from './skins/Blue_Metrix.wsz';
-import green from './skins/Green-Dimension-V2.wsz';
-import internetArchive from './skins/Internet-Archive.wsz';
-import osx from './skins/MacOSXAqua1-5.wsz';
-import musicForever from './skins/music-forever.wsz';
-import neox from './skins/NeoX.wsz';
-import sonic from './skins/Sonic_Attitude.wsz';
-import topaz from './skins/TopazAmp1-2.wsz';
-import visor from './skins/Vizor1-01.wsz';
-import classic from './skins/Winamp5_Classified_v5.5.wsz';
-import xmms from './skins/XMMS-Turquoise.wsz';
-import zaxon from './skins/ZaxonRemake1-0.wsz';
-import base from './skins/base-2.91.wsz';
-import sonyCdx from './skins/Sony CDX-MP3.wsz';
+import buleMatrix from 'assets/skins/Blue_Metrix.wsz';
+import green from 'assets/skins/Green-Dimension-V2.wsz';
+import internetArchive from 'assets/skins/Internet-Archive.wsz';
+import osx from 'assets/skins/MacOSXAqua1-5.wsz';
+import musicForever from 'assets/skins/music-forever.wsz';
+import neox from 'assets/skins/NeoX.wsz';
+import sonic from 'assets/skins/Sonic_Attitude.wsz';
+import topaz from 'assets/skins/TopazAmp1-2.wsz';
+import visor from 'assets/skins/Vizor1-01.wsz';
+import classic from 'assets/skins/Winamp5_Classified_v5.5.wsz';
+import xmms from 'assets/skins/XMMS-Turquoise.wsz';
+import zaxon from 'assets/skins/ZaxonRemake1-0.wsz';
+import base from 'assets/skins/base-2.91.wsz';
+import sonyCdx from '../../../assets/skins/Sony CDX-MP3.wsz';
 
 export const availableSkins = [
   { url: base, name: 'Default' },

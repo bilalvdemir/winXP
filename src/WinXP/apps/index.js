@@ -15,7 +15,6 @@ import notepad from 'assets/windowsIcons/327(16x16).png';
 import notepadLarge from 'assets/windowsIcons/327(32x32).png';
 import winamp from 'assets/windowsIcons/winamp.png';
 import paintLarge from 'assets/windowsIcons/680(32x32).png';
-import winampIcon from 'assets/windowsIcons/550(32x32).png';
 import paint from 'assets/windowsIcons/680(16x16).png';
 
 const gen = () => {
@@ -151,20 +150,6 @@ export const defaultIconState = [
     id: 5,
     icon: paintLarge,
     title: 'Paint',
-    component: Paint,
-    isFocus: false,
-  },
-  {
-    id: 6,
-    icon: winampIcon,
-    title: 'Winamp Default',
-    component: Paint,
-    isFocus: false,
-  },
-  {
-    id: 7,
-    icon: winampIcon,
-    title: 'Winamp Classic',
     component: Paint,
     isFocus: false,
   },
