@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "author": "ShizukuIchi <shizukuichi@gmail.com>",
-  "homepage": "https://winxp.now.sh",
+  "homepage": "https://bilalvdemir.github.io/winamp-xp-site",
   "dependencies": {
     "butterchurn": "^3.0.0-beta.3",
     "butterchurn-presets": "3.0.0-beta.4",

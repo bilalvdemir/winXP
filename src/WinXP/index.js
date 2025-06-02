@@ -219,7 +219,9 @@ function WinXP() {
     const appSetting = Object.values(appSettings).find(
       setting => setting.component === component,
     );
-    localStorage.setItem('winampSkinUrl', injectProps.skin);
+    if (injectProps?.skin) {
+      localStorage.setItem('winampSkinUrl', injectProps.skin);
+    }
     dispatch({ type: ADD_APP, payload: { ...appSetting, injectProps } });
   }
   function getFocusedAppId() {
