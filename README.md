@@ -19,6 +19,12 @@ Windows XP 👉 https://bilalvdemir.github.io/winamp-xp-site/
 
 Generally open an issue (or comment on an issue if there's one already) before starting work on a PR.
 
+## Build
+
+yarn run build
+// And move your build folder to website hosting location
+
+
 ## License
 
 The Windows XP name, artwork, trademark are surely property of Microsoft. This project is provided for educational purposes only. It is not affiliated with and has not been approved by Microsoft.
