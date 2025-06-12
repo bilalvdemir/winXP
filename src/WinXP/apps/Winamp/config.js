@@ -345,7 +345,7 @@ export const initialTracks = [
   },
   {
     url:
-      'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Shakira - Whenever, Wherever (Official HD Video).mp3.mp3',
+      'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Shakira%20-%20Whenever%2C%20Wherever%20(Official%20HD%20Video).mp3',
     duration: 240, // Placeholder duration
     metaData: {
       title: 'Whenever, Wherever',
