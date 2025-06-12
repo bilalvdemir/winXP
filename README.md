@@ -9,11 +9,11 @@ Features:
 - Minesweeper, Internet Explorer, My Computer, Notepad, Winamp, Paint
 - Power off menu
 
-## [Try it!](https://winxp.now.sh)
+## [Try it!](https://bilalvdemir.github.io/winamp-xp-site/)
 
-Windows XP 👉 https://winxp.now.sh
+Windows XP 👉 https://bilalvdemir.github.io/winamp-xp-site/
 
-[![](demo/demo.gif)](https://winxp.now.sh)
+[![](demo/demo.gif)](https://bilalvdemir.github.io/winamp-xp-site/)
 
 ## Contributing
 
