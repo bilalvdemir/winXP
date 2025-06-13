@@ -75,6 +75,8 @@ function Footer({
           alt="start"
           className="footer__start"
           onMouseDown={toggleMenu}
+          onMouseUp={toggleMenu}
+          onClick={toggleMenu}
         />
         {[...apps].map(
           app =>

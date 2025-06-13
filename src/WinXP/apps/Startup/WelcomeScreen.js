@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
-import windowsXpLogoWhiteTextBgCropped from 'assets/images/windows-xp-logo-white-text-transparent-bg-cropped.png';
-import profileDuck from 'assets/images/profile-picture-duck.jpg';
-import profileChess from 'assets/images/profile-picture-chess.png';
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import windowsStartup from 'assets/sounds/windows-startup.mp3';
 
 const WelcomeScreen = ({ onLogin }) => {
-  const [activeAccount, setActiveAccount] = useState(null);
-
   useEffect(() => {
-    setTimeout(() => {
+    const audio = new Audio(windowsStartup);
+    audio.volume = 0.6;
+    audio.play().catch(error => {
+      console.warn('Otomatik ses çalma başarısız oldu:', error);
+    });
+
+    const timeoutId = setTimeout(() => {
       onLogin();
     }, 2500);
-  }, []);
+
+    return () => clearTimeout(timeoutId);
+  }, [onLogin]);
 
   return (
     <LoginContainer>
@@ -23,7 +27,6 @@ const WelcomeScreen = ({ onLogin }) => {
   );
 };
 
-// Styled Components - Orjinal CSS'e birebir uygun
 const LoginContainer = styled.div`
   width: 100vw;
   height: 100vh;
