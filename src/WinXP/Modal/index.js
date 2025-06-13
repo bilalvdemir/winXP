@@ -35,18 +35,36 @@ const Container = ({ className, children }) => {
     </div>
   );
 };
-const Menu = ({ mode, onClose, onClickButton }) => {
+
+const Menu = ({
+  mode,
+  onClose,
+  onClickButton,
+  onLogOff,
+  onShutdown,
+  onRestart,
+}) => {
   function renderButtons() {
     if (mode === POWER_STATE.TURN_OFF) {
       return (
         <>
           <ButtonDisabled img={off} text="Stand By" />
-          <Button img={off} text="Turn Off" onClick={onClickButton} />
+          <Button
+            img={off}
+            text="Turn Off"
+            onClick={() => {
+              onShutdown && onShutdown();
+              onClose();
+            }}
+          />
           <Button
             style={{ margin: '-3px 0 0px 0', width: '33px', height: '33px' }}
             img={restart}
             text="Restart"
-            onClick={onClickButton}
+            onClick={() => {
+              onRestart && onRestart();
+              onClose();
+            }}
           />
         </>
       );
@@ -57,16 +75,31 @@ const Menu = ({ mode, onClose, onClickButton }) => {
           img={switcher}
           text="Switch User"
           style={{ border: '1px solid #fff', borderRadius: '3px' }}
-          onClick={onClickButton}
+          onClick={() => {
+            onLogOff && onLogOff();
+            onClose();
+          }}
         />
-        <Button img={lock} text="Log Off" onClick={onClickButton} />
+        <Button
+          img={lock}
+          text="Log Off"
+          onClick={() => {
+            onLogOff && onLogOff();
+            onClose();
+          }}
+        />
       </>
     );
   }
+
   return (
     <div className="modal">
       <header className="header">
-        <span className="header__text">Log Off Windows</span>
+        <span className="header__text">
+          {mode === POWER_STATE.TURN_OFF
+            ? 'Turn off computer'
+            : 'Log Off Windows'}
+        </span>
         <img src={windowsLogo} alt="" className="header__img" />
       </header>
       <div className="content">{renderButtons()}</div>
@@ -78,14 +111,12 @@ const Menu = ({ mode, onClose, onClickButton }) => {
     </div>
   );
 };
+
 const Button = ({ style, img, text, onClick }) => {
-  function _onClick() {
-    onClick(text);
-  }
   return (
     <div className="button-container">
       <img
-        onClick={_onClick}
+        onClick={onClick}
         style={{ ...style }}
         src={img}
         alt={text}
@@ -95,12 +126,14 @@ const Button = ({ style, img, text, onClick }) => {
     </div>
   );
 };
+
 const ButtonDisabled = ({ img, text }) => (
   <div className="button-container disable">
     <img src={img} alt={text} className="button-img" />
     <span className="button-text">{text}</span>
   </div>
 );
+
 const StyledContainer = styled(Container)`
   font-family: Tahoma, 'Noto Sans', sans-serif;
   position: fixed;
@@ -172,8 +205,10 @@ const StyledContainer = styled(Container)`
     flex-direction: column;
     align-items: center;
     color: #fff;
+    cursor: pointer;
     &.disable {
       color: gray;
+      cursor: not-allowed;
       .button-img {
         opacity: 0.3;
         &:hover {
@@ -188,6 +223,7 @@ const StyledContainer = styled(Container)`
   .button-img {
     height: 30px;
     width: 30px;
+    cursor: pointer;
     &:hover {
       filter: brightness(1.1);
     }
@@ -219,6 +255,7 @@ const StyledContainer = styled(Container)`
       inset 0 0 0 1px skyblue, inset 2px -2px skyblue;
     border: none;
     outline: none;
+    cursor: pointer;
     &:hover {
       box-shadow: 1px 1px black, 1px 1px 2px 0px white, inset 0 0 0 1px orange,
         inset 2px -2px orange;

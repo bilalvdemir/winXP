@@ -176,7 +176,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Kibariye-Tarkan-Gulumse-Kaderine.mp3',
-    duration: 240, // Placeholder duration
+    duration: 278,
     metaData: {
       title: 'Gülümse Kaderine',
       artist: 'Kibariye & Tarkan',
@@ -186,7 +186,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Levent-Yuksel-Zalim.mp3',
-    duration: 240, // Placeholder duration
+    duration: 277,
     metaData: {
       title: 'Zalim',
       artist: 'Levent Yüksel',
@@ -196,7 +196,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Musa-Cek-Git-Bebegim.mp3',
-    duration: 240, // Placeholder duration
+    duration: 248,
     metaData: {
       title: 'Çek Git Bebeğim',
       artist: 'Musa',
@@ -206,7 +206,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Mustafa-Sandal-Araba.mp3',
-    duration: 240, // Placeholder duration
+    duration: 291,
     metaData: {
       title: 'Araba',
       artist: 'Mustafa Sandal',
@@ -216,7 +216,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Mustafa-Sandal-Aska-Yurek-Gerek.mp3',
-    duration: 240, // Placeholder duration
+    duration: 346,
     metaData: {
       title: 'Aşka Yürek Gerek',
       artist: 'Mustafa Sandal',
@@ -226,7 +226,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Pamela-istanbul.mp3',
-    duration: 240, // Placeholder duration
+    duration: 278,
     metaData: {
       title: 'İstanbul',
       artist: 'Pamela',
@@ -236,7 +236,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Pinhani-Ne-guzel-guldun.mp3',
-    duration: 240, // Placeholder duration
+    duration: 292,
     metaData: {
       title: 'Ne Güzel Güldün',
       artist: 'Pinhani',
@@ -246,7 +246,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Pitbull-Hotel-Room-Service-(Official-Audio).mp3',
-    duration: 240, // Placeholder duration
+    duration: 268,
     metaData: {
       title: 'Hotel Room Service',
       artist: 'Pitbull',
@@ -256,7 +256,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Pitbull-Rain-Over-Me-ft-Marc-Anthony.mp3',
-    duration: 240, // Placeholder duration
+    duration: 233,
     metaData: {
       title: 'Rain Over Me (feat. Marc Anthony)',
       artist: 'Pitbull',
@@ -266,7 +266,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Rafet-El-Roman-Direniyorum.mp3',
-    duration: 240, // Placeholder duration
+    duration: 278,
     metaData: {
       title: 'Direniyorum',
       artist: 'Rafet El Roman',
@@ -276,7 +276,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Rafet-El-Roman-Yalanci-Sahidim.mp3',
-    duration: 240, // Placeholder duration
+    duration: 234,
     metaData: {
       title: 'Yalancı Şahidim',
       artist: 'Rafet El Roman',
@@ -286,7 +286,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Rober-Hatemo-Beyaz-ve-Sen-(Official-Audio).mp3',
-    duration: 240, // Placeholder duration
+    duration: 219,
     metaData: {
       title: 'Beyaz ve Sen',
       artist: 'Rober Hatemo',
@@ -296,7 +296,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Sean-Paul-Get-BusyLike-Glue-(Official-Audio).mp3',
-    duration: 240, // Placeholder duration
+    duration: 265,
     metaData: {
       title: 'Get Busy/Like Glue',
       artist: 'Sean Paul',
@@ -306,7 +306,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Seksendort-Olurum-Hasretinle-(Official-Audio).mp3',
-    duration: 240, // Placeholder duration
+    duration: 282,
     metaData: {
       title: 'Olurum Hasretinle',
       artist: 'Seksendört',
@@ -316,7 +316,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Serdar-Ortac-Karabiberim.mp3',
-    duration: 240, // Placeholder duration
+    duration: 227,
     metaData: {
       title: 'Karabiberim',
       artist: 'Serdar Ortaç',
@@ -326,7 +326,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Sevda-Annem-Gibi.mp3',
-    duration: 240, // Placeholder duration
+    duration: 299,
     metaData: {
       title: 'Annem Gibi',
       artist: 'Sevda',
@@ -336,7 +336,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Sezen-Aksu-Seni-Yerler-(Official-Audio).mp3',
-    duration: 240, // Placeholder duration
+    duration: 247,
     metaData: {
       title: 'Seni Yerler',
       artist: 'Sezen Aksu',
@@ -346,7 +346,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Shakira%20-%20Whenever%2C%20Wherever%20(Official%20HD%20Video).mp3',
-    duration: 240, // Placeholder duration
+    duration: 196,
     metaData: {
       title: 'Whenever, Wherever',
       artist: 'Shakira',
@@ -356,7 +356,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Shakira-Hips-Dont-Lie-(Official-Audio)-ft-Wyclef-Jean.mp3',
-    duration: 240, // Placeholder duration
+    duration: 218,
     metaData: {
       title: 'Hips Don’t Lie (feat. Wyclef Jean)',
       artist: 'Shakira',
@@ -366,7 +366,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Shakira-La-Tortura-(Official-Audio)-ft-Alejandro-Sanz.mp3',
-    duration: 240, // Placeholder duration
+    duration: 224,
     metaData: {
       title: 'La Tortura (feat. Alejandro Sanz)',
       artist: 'Shakira',
@@ -376,7 +376,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Shakira-Waka-Waka-(This-Time-for-Africa)-(The-Official-2010-FIFA-Wordcup.mp3',
-    duration: 240, // Placeholder duration
+    duration: 210,
     metaData: {
       title: 'Waka Waka (This Time for Africa)',
       artist: 'Shakira',
@@ -386,7 +386,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Sibel-Can-Padisah.mp3',
-    duration: 240, // Placeholder duration
+    duration: 236,
     metaData: {
       title: 'Padişah',
       artist: 'Sibel Can',
@@ -396,7 +396,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Sibel-Can-Tarkan-Cakmak-Cakmak.mp3',
-    duration: 240, // Placeholder duration
+    duration: 251,
     metaData: {
       title: 'Çakmak Çakmak',
       artist: 'Sibel Can & Tarkan',
@@ -406,7 +406,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/TARKAN-Bir-Oluruz-Yolunda.mp3',
-    duration: 240, // Placeholder duration
+    duration: 275,
     metaData: {
       title: 'Bir Oluruz Yolunda',
       artist: 'Tarkan',
@@ -416,7 +416,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/TARKAN-Dudu.mp3',
-    duration: 240, // Placeholder duration
+    duration: 263,
     metaData: {
       title: 'Dudu',
       artist: 'Tarkan',
@@ -426,7 +426,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Teoman-Istanbulda-Sonbahar-(2002-Mix).mp3',
-    duration: 240, // Placeholder duration
+    duration: 220,
     metaData: {
       title: 'İstanbul’da Sonbahar (2002 Mix)',
       artist: 'Teoman',
@@ -436,7 +436,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Tripkolic-Sonu-Gelmez.mp3',
-    duration: 240, // Placeholder duration
+    duration: 340,
     metaData: {
       title: 'Sonu Gelmez',
       artist: 'Tripkolic',
@@ -446,7 +446,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Tripkolic-Yalniz-beni-sev.mp3',
-    duration: 240, // Placeholder duration
+    duration: 171,
     metaData: {
       title: 'Yalnız Beni Sev',
       artist: 'Tripkolic',
@@ -456,7 +456,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Yuksek-Sadakat-Belki-Ustumuzden-Bir-Kus-Gecer.mp3',
-    duration: 240, // Placeholder duration
+    duration: 270,
     metaData: {
       title: 'Belki Üstümüzden Bir Kuş Geçer',
       artist: 'Yüksek Sadakat',
@@ -466,7 +466,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/Zeynep-Casalini-Duvar.mp3',
-    duration: 240, // Placeholder duration
+    duration: 240,
     metaData: {
       title: 'Duvar',
       artist: 'Zeynep Casalini',
@@ -475,18 +475,8 @@ export const initialTracks = [
   },
   {
     url:
-      'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/error.wav',
-    duration: 10, // Placeholder duration
-    metaData: {
-      title: 'Hata Sesi',
-      artist: 'Sistem',
-      album,
-    },
-  },
-  {
-    url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/maNga-Bitti-Ruya.mp3',
-    duration: 240, // Placeholder duration
+    duration: 239,
     metaData: {
       title: 'Bitti Rüya',
       artist: 'maNga',
@@ -496,7 +486,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/maNga-Cevapsiz-Sorular.mp3',
-    duration: 240, // Placeholder duration
+    duration: 324,
     metaData: {
       title: 'Cevapsız Sorular',
       artist: 'maNga',
@@ -506,7 +496,7 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/maNga-Dunyanin-Sonuna-Dogmusum.mp3',
-    duration: 240, // Placeholder duration
+    duration: 257,
     metaData: {
       title: 'Dünyanın Sonuna Doğmuşum',
       artist: 'maNga',
@@ -516,20 +506,10 @@ export const initialTracks = [
   {
     url:
       'https://raw.githubusercontent.com/bilalvdemir/winXP/refs/heads/master/src/assets/sounds/maNga-Dursun-Zaman-ft-Goksel.mp3',
-    duration: 240, // Placeholder duration
+    duration: 319,
     metaData: {
       title: 'Dursun Zaman (feat. Göksel)',
       artist: 'maNga',
-      album,
-    },
-  },
-  {
-    url:
-      'https://raw.githubusercontent.com/captbaritone/webamp-music/4b556fbf/CM_aka_Creative_-_12_-_The_Cycle_Featuring_Mista_Mista.mp3',
-    duration: 221.44,
-    metaData: {
-      title: 'The Cycle (Featuring Mista Mista)',
-      artist: 'CM aka Creative',
       album,
     },
   },

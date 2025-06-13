@@ -223,7 +223,7 @@ function MyComputer({ onClose }) {
                   <iframe
                     title="ghbtn"
                     style={{ margin: '0 0 3px -1px', height: '30px' }}
-                    src="https://ghbtns.com/github-btn.html?user=ShizukuIchi&repo=winXP&type=star&count=true&size=large"
+                    src="https://ghbtns.com/github-btn.html?user=bilalvdemir&repo=winXP&type=star&count=true&size=large"
                     frameBorder="0"
                     scrolling="0"
                     width="170px"
@@ -237,7 +237,7 @@ function MyComputer({ onClose }) {
                     alt="control"
                   />
                   <a
-                    href="https://medium.com/@ShizukuIchi"
+                    href="https://bilaldem.medium.com"
                     target="_blank"
                     rel="noreferrer"
                     className="com__content__left__card__text link"
@@ -252,7 +252,7 @@ function MyComputer({ onClose }) {
                     alt="control"
                   />
                   <a
-                    href="https://github.com/ShizukuIchi/minesweeper"
+                    href="https://github.com/bilalvdemir/winXP"
                     target="_blank"
                     rel="noreferrer"
                     className="com__content__left__card__text link"
@@ -339,7 +339,7 @@ function MyComputer({ onClose }) {
               </div>
               <div className="com__content__right__card__content">
                 <a
-                  href="https://github.com/ShizukuIchi"
+                  href="https://github.com/bilalvdemir"
                   target="_blank"
                   rel="noreferrer"
                   className="com__content__right__card__item--me"
@@ -350,21 +350,6 @@ function MyComputer({ onClose }) {
                     alt="control"
                   />
                   <div className="com__content__right__card__text">Github</div>
-                </a>
-                <a
-                  href="https://sh1zuku.csie.io"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="com__content__right__card__item--me"
-                >
-                  <img
-                    className="com__content__right__card__img"
-                    src="https://a.ppy.sh/2926513_1448497605.png"
-                    alt="control"
-                  />
-                  <div className="com__content__right__card__text">
-                    My Website
-                  </div>
                 </a>
               </div>
             </div>

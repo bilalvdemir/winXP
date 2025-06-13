@@ -10,3 +10,7 @@ export const START_SELECT = 'START_SELECT';
 export const END_SELECT = 'END_SELECT';
 export const POWER_OFF = 'POWER_OFF';
 export const CANCEL_POWER_OFF = 'CANCEL_POWER_OFF';
+export const STARTUP_COMPLETE = 'STARTUP_COMPLETE';
+export const USER_LOGIN = 'USER_LOGIN';
+export const WELCOME = 'WELCOME';
+export const USER_LOGOUT = 'USER_LOGOUT';

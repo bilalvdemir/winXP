@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useCallback } from 'react';
+import React, { useReducer, useRef, useCallback, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import useMouse from 'react-use/lib/useMouse';
 
@@ -15,6 +15,10 @@ import {
   END_SELECT,
   POWER_OFF,
   CANCEL_POWER_OFF,
+  STARTUP_COMPLETE,
+  USER_LOGIN,
+  USER_LOGOUT,
+  WELCOME,
 } from './constants/actions';
 import { FOCUSING, POWER_STATE } from './constants';
 import { defaultIconState, defaultAppState, appSettings } from './apps';
@@ -23,18 +27,118 @@ import Footer from './Footer';
 import Windows from './Windows';
 import Icons from './Icons';
 import { DashedBox } from 'components';
+import StartupScreen from './apps/Startup/StartupScreen';
+import LoginScreen from './apps/Startup/LoginScreen';
+import WelcomeScreen from './apps/Startup/WelcomeScreen';
 
-const initState = {
-  apps: defaultAppState,
-  nextAppID: defaultAppState.length,
-  nextZIndex: defaultAppState.length,
-  focusing: FOCUSING.WINDOW,
-  icons: defaultIconState,
-  selecting: false,
-  powerState: POWER_STATE.START,
+const BOOT_STATE = {
+  STARTUP: 'startup',
+  LOGIN: 'login',
+  DESKTOP: 'desktop',
+  WELCOME: 'welcome',
 };
+
+// LocalStorage yardımcı fonksiyonları
+const LOGIN_STORAGE_KEY = 'winxp_login_session';
+const LOGIN_DURATION = 60 * 60 * 1000; // 1 saat (milisaniye)
+
+const saveLoginSession = user => {
+  const loginData = {
+    user,
+    timestamp: Date.now(),
+    expiresAt: Date.now() + LOGIN_DURATION,
+  };
+  localStorage.setItem(LOGIN_STORAGE_KEY, JSON.stringify(loginData));
+};
+
+const getValidLoginSession = () => {
+  try {
+    const storedData = localStorage.getItem(LOGIN_STORAGE_KEY);
+    if (!storedData) return null;
+
+    const loginData = JSON.parse(storedData);
+    const now = Date.now();
+
+    // 1 saat geçmiş mi kontrol et
+    if (now > loginData.expiresAt) {
+      localStorage.removeItem(LOGIN_STORAGE_KEY);
+      return null;
+    }
+
+    return loginData.user;
+  } catch (error) {
+    console.error('Login session okuma hatası:', error);
+    localStorage.removeItem(LOGIN_STORAGE_KEY);
+    return null;
+  }
+};
+
+const clearLoginSession = () => {
+  localStorage.removeItem(LOGIN_STORAGE_KEY);
+};
+
+// Initial state'i localStorage'dan kontrol ederek belirle
+const getInitialState = () => {
+  const validUser = getValidLoginSession();
+
+  if (validUser) {
+    // Geçerli login varsa direkt desktop'a git
+    return {
+      bootState: BOOT_STATE.DESKTOP,
+      currentUser: validUser,
+      startupProgress: 0,
+      apps: defaultAppState,
+      nextAppID: defaultAppState.length,
+      nextZIndex: defaultAppState.length,
+      focusing: FOCUSING.WINDOW,
+      icons: defaultIconState,
+      selecting: false,
+      powerState: POWER_STATE.START,
+    };
+  } else {
+    // Geçerli login yoksa normal startup
+    return {
+      bootState: BOOT_STATE.STARTUP,
+      currentUser: null,
+      startupProgress: 0,
+      apps: defaultAppState,
+      nextAppID: defaultAppState.length,
+      nextZIndex: defaultAppState.length,
+      focusing: FOCUSING.WINDOW,
+      icons: defaultIconState,
+      selecting: false,
+      powerState: POWER_STATE.START,
+    };
+  }
+};
+
 const reducer = (state, action = { type: '' }) => {
   switch (action.type) {
+    case STARTUP_COMPLETE:
+      return { ...state, bootState: BOOT_STATE.LOGIN };
+    case USER_LOGIN:
+      // Login bilgisini localStorage'a kaydet
+      saveLoginSession(action.payload);
+      return {
+        ...state,
+        bootState: BOOT_STATE.WELCOME,
+        currentUser: action.payload,
+      };
+    case WELCOME:
+      return {
+        ...state,
+        bootState: BOOT_STATE.DESKTOP,
+        currentUser: action.payload,
+      };
+    case USER_LOGOUT:
+      // Logout olurken session'ı temizle
+      clearLoginSession();
+      return {
+        ...state,
+        bootState: BOOT_STATE.LOGIN,
+        currentUser: null,
+        apps: [],
+      };
     case ADD_APP:
       const app = state.apps.find(
         _app => _app.component === action.payload.component,
@@ -173,14 +277,35 @@ const reducer = (state, action = { type: '' }) => {
       return state;
   }
 };
+
 function WinXP() {
-  const [state, dispatch] = useReducer(reducer, initState);
+  const [state, dispatch] = useReducer(reducer, getInitialState());
   const ref = useRef(null);
   const mouse = useMouse(ref);
   const focusedAppId = getFocusedAppId();
+
+  // Session süresini kontrol et
+  useEffect(() => {
+    if (state.currentUser && state.bootState === BOOT_STATE.DESKTOP) {
+      const checkSession = () => {
+        const validUser = getValidLoginSession();
+        if (!validUser) {
+          // Session süresi dolmuş, logout yap
+          dispatch({ type: USER_LOGOUT });
+        }
+      };
+
+      // Her 5 dakikada bir kontrol et
+      const interval = setInterval(checkSession, 5 * 60 * 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [state.currentUser, state.bootState]);
+
   const onFocusApp = useCallback(id => {
     dispatch({ type: FOCUS_APP, payload: id });
   }, []);
+
   const onMaximizeWindow = useCallback(
     id => {
       if (focusedAppId === id) {
@@ -189,6 +314,7 @@ function WinXP() {
     },
     [focusedAppId],
   );
+
   const onMinimizeWindow = useCallback(
     id => {
       if (focusedAppId === id) {
@@ -197,6 +323,7 @@ function WinXP() {
     },
     [focusedAppId],
   );
+
   const onCloseApp = useCallback(
     id => {
       if (focusedAppId === id) {
@@ -205,6 +332,7 @@ function WinXP() {
     },
     [focusedAppId],
   );
+
   function onMouseDownFooterApp(id) {
     if (focusedAppId === id) {
       dispatch({ type: MINIMIZE_APP, payload: id });
@@ -212,9 +340,11 @@ function WinXP() {
       dispatch({ type: FOCUS_APP, payload: id });
     }
   }
+
   function onMouseDownIcon(id) {
     dispatch({ type: FOCUS_ICON, payload: id });
   }
+
   function onDoubleClickIcon(component, injectProps) {
     const appSetting = Object.values(appSettings).find(
       setting => setting.component === component,
@@ -224,6 +354,7 @@ function WinXP() {
     }
     dispatch({ type: ADD_APP, payload: { ...appSetting, injectProps } });
   }
+
   function getFocusedAppId() {
     if (state.focusing !== FOCUSING.WINDOW) return -1;
     const focusedApp = [...state.apps]
@@ -231,9 +362,11 @@ function WinXP() {
       .find(app => !app.minimized);
     return focusedApp ? focusedApp.id : -1;
   }
+
   function onMouseDownFooter() {
     dispatch({ type: FOCUS_DESKTOP });
   }
+
   function onClickMenuItem(o) {
     if (o === 'Internet')
       dispatch({ type: ADD_APP, payload: appSettings['Internet Explorer'] });
@@ -260,6 +393,7 @@ function WinXP() {
         },
       });
   }
+
   function onMouseDownDesktop(e) {
     if (e.target === e.currentTarget)
       dispatch({
@@ -267,15 +401,18 @@ function WinXP() {
         payload: { x: mouse.docX, y: mouse.docY },
       });
   }
+
   function onMouseUpDesktop(e) {
     dispatch({ type: END_SELECT });
   }
+
   const onIconsSelected = useCallback(
     iconIds => {
       dispatch({ type: SELECT_ICONS, payload: iconIds });
     },
     [dispatch],
   );
+
   function onClickModalButton(text) {
     dispatch({ type: CANCEL_POWER_OFF });
     dispatch({
@@ -283,9 +420,32 @@ function WinXP() {
       payload: appSettings.Error,
     });
   }
+
   function onModalClose() {
     dispatch({ type: CANCEL_POWER_OFF });
   }
+
+  // Modal işlemleri için callback'ler
+  function handleLogOff() {
+    dispatch({ type: USER_LOGOUT });
+  }
+
+  function handleShutdown() {
+    // Session'ı temizle ve startup'a git
+    clearLoginSession();
+    dispatch({ type: CANCEL_POWER_OFF });
+    // State'i sıfırla ve startup'a yönlendir
+    window.location.reload();
+  }
+
+  function handleRestart() {
+    // Session'ı temizle ve startup'a git
+    clearLoginSession();
+    dispatch({ type: CANCEL_POWER_OFF });
+    // State'i sıfırla ve startup'a yönlendir
+    window.location.reload();
+  }
+
   return (
     <Container
       ref={ref}
@@ -293,54 +453,79 @@ function WinXP() {
       onMouseDown={onMouseDownDesktop}
       state={state.powerState}
     >
-      <Icons
-        icons={state.icons}
-        onMouseDown={onMouseDownIcon}
-        onDoubleClick={onDoubleClickIcon}
-        displayFocus={state.focusing === FOCUSING.ICON}
-        appSettings={appSettings}
-        mouse={mouse}
-        selecting={state.selecting}
-        setSelectedIcons={onIconsSelected}
-      />
-      <DashedBox startPos={state.selecting} mouse={mouse} />
-      <Windows
-        apps={state.apps}
-        onMouseDown={onFocusApp}
-        onClose={onCloseApp}
-        onMinimize={onMinimizeWindow}
-        onMaximize={onMaximizeWindow}
-        focusedAppId={focusedAppId}
-      />
-      <Footer
-        apps={state.apps}
-        onMouseDownApp={onMouseDownFooterApp}
-        focusedAppId={focusedAppId}
-        onMouseDown={onMouseDownFooter}
-        onClickMenuItem={onClickMenuItem}
-      />
-      {state.powerState !== POWER_STATE.START && (
-        <Modal
-          onClose={onModalClose}
-          onClickButton={onClickModalButton}
-          mode={state.powerState}
+      {state.bootState === BOOT_STATE.STARTUP && (
+        <StartupScreen
+          onComplete={() => dispatch({ type: 'STARTUP_COMPLETE' })}
         />
+      )}
+
+      {/* LOGIN SCREEN */}
+      {state.bootState === BOOT_STATE.LOGIN && (
+        <LoginScreen
+          onLogin={user => dispatch({ type: 'USER_LOGIN', payload: user })}
+        />
+      )}
+      {state.bootState === BOOT_STATE.WELCOME && (
+        <WelcomeScreen
+          onLogin={user => dispatch({ type: 'WELCOME', payload: user })}
+        />
+      )}
+      {state.bootState === BOOT_STATE.DESKTOP && (
+        <>
+          <Icons
+            icons={state.icons}
+            onMouseDown={onMouseDownIcon}
+            onDoubleClick={onDoubleClickIcon}
+            displayFocus={state.focusing === FOCUSING.ICON}
+            appSettings={appSettings}
+            mouse={mouse}
+            selecting={state.selecting}
+            setSelectedIcons={onIconsSelected}
+          />
+          <DashedBox startPos={state.selecting} mouse={mouse} />
+          <Windows
+            apps={state.apps}
+            onMouseDown={onFocusApp}
+            onClose={onCloseApp}
+            onMinimize={onMinimizeWindow}
+            onMaximize={onMaximizeWindow}
+            focusedAppId={focusedAppId}
+          />
+          <Footer
+            apps={state.apps}
+            onMouseDownApp={onMouseDownFooterApp}
+            focusedAppId={focusedAppId}
+            onMouseDown={onMouseDownFooter}
+            onClickMenuItem={onClickMenuItem}
+          />
+          {state.powerState !== POWER_STATE.START && (
+            <Modal
+              onClose={onModalClose}
+              onClickButton={onClickModalButton}
+              onLogOff={handleLogOff}
+              onShutdown={handleShutdown}
+              onRestart={handleRestart}
+              mode={state.powerState}
+            />
+          )}
+        </>
       )}
     </Container>
   );
 }
 
 const powerOffAnimation = keyframes`
-  0% {
-    filter: brightness(1) grayscale(0);
-  }
-  30% {
-    filter: brightness(1) grayscale(0);
-  }
-  100% {
-    filter: brightness(0.6) grayscale(1);
-  }
+    0% {
+        filter: brightness(1) grayscale(0);
+    }
+    30% {
+        filter: brightness(1) grayscale(0);
+    }
+    100% {
+        filter: brightness(0.6) grayscale(1);
+    }
 `;
+
 const animation = {
   [POWER_STATE.START]: '',
   [POWER_STATE.TURN_OFF]: powerOffAnimation,

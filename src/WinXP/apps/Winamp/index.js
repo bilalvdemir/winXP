@@ -238,6 +238,8 @@ function Winamp({ onClose, onMinimize }) {
           element.style.position = 'fixed';
           element.style.left = '450px';
           element.style.top = '50px';
+          element.style.width = '800px'; // BOYUT EKLENDİ
+          element.style.height = '600px'; // BOYUT EKLENDİ
           element.style.zIndex = '1001';
           console.log('✅ Milkdrop window repositioned');
         }
@@ -253,6 +255,8 @@ function Winamp({ onClose, onMinimize }) {
           parent.style.position = 'fixed';
           parent.style.left = '450px';
           parent.style.top = '50px';
+          parent.style.width = '800px'; // BOYUT EKLENDİ
+          parent.style.height = '600px'; // BOYUT EKLENDİ
           parent.style.zIndex = '1001';
           console.log('✅ Canvas parent repositioned');
         }
@@ -274,11 +278,12 @@ function Winamp({ onClose, onMinimize }) {
       availableSkins, // Skin listesini Webamp'a ekle
       __butterchurnOptions: getButterchurnOptions(false),
       __initialWindowLayout: {
-        main: { position: { x: 50, y: 50 } },
-        equalizer: { position: { x: 50, y: 166 } },
-        playlist: { position: { x: 50, y: 282 }, size: [0, 4] },
+        main: { position: { x: 300, y: 0 } },
+        equalizer: { position: { x: 300, y: 116 } },
+        playlist: { position: { x: 300, y: 220 }, size: [0, 6] },
         milkdrop: {
-          position: { x: 325, y: 50 },
+          position: { x: 575, y: 0 },
+          size: [4, 2],
         },
       },
     });
