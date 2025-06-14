@@ -266,11 +266,11 @@ function Winamp({ onClose, onMinimize }) {
       availableSkins, // Skin listesini Webamp'a ekle
       __butterchurnOptions: getButterchurnOptions(false),
       __initialWindowLayout: {
-        main: { position: { x: 300, y: 0 } },
-        equalizer: { position: { x: 300, y: 116 } },
-        playlist: { position: { x: 300, y: 232 }, size: [0, 6] },
+        main: { position: { x: 0, y: 0 } },
+        equalizer: { position: { x: 0, y: 116 } },
+        playlist: { position: { x: 0, y: 232 }, size: [0, 6] },
         milkdrop: {
-          position: { x: 575, y: 0 },
+          position: { x: 275, y: 0 },
           size: [4, 8],
         },
       },
@@ -392,8 +392,8 @@ function Winamp({ onClose, onMinimize }) {
       <div
         style={{
           position: 'fixed',
-          left: 0,
-          top: 0,
+          left: 600,
+          top: 150,
           right: 0,
           bottom: 0,
           zIndex: 1000,

@@ -70,14 +70,13 @@ function Footer({
         <div ref={menu} className="footer__start__menu">
           {menuOn && <FooterMenu onClick={_onClickMenuItem} />}
         </div>
-        <img
-          src={startButton}
-          alt="start"
-          className="footer__start"
+        <div
           onMouseDown={toggleMenu}
           onMouseUp={toggleMenu}
           onClick={toggleMenu}
-        />
+        >
+          <img src={startButton} alt="start" className="footer__start" />
+        </div>
         {[...apps].map(
           app =>
             !app.header.noFooterWindow && (
