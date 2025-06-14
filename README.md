@@ -13,7 +13,7 @@ Features:
 
 Windows XP 👉 https://bilalvdemir.github.io/winamp-xp-site/
 
-[![](demo/demo.gif)](https://bilalvdemir.github.io/winamp-xp-site/)
+[![](demo/demo.gif)](https://bilalvdemir.github.io/winamp-xp/)
 
 ## Contributing
 
