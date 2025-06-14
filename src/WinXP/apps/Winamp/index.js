@@ -165,21 +165,19 @@ function Winamp({ onClose, onMinimize }) {
 
           // Güvenli preset listesi - bilinen çalışan preset'ler
           const safePresets = [
-            'Geiss - Reaction Diffusion 2',
-            'Geiss - Spiral Artifact',
-            'Geiss - Thumb Drum',
-            'martin - acid wiring',
-            'martin - angel flight',
-            'martin - chain breaker',
-            'martin - disco mix 4',
-            'martin - fruit machine',
-            'Flexi - alien fish pond',
-            'Flexi - area 51',
-            'Flexi - mindblob mix',
-            '_Geiss - Artifact 01',
-            '_Geiss - Desert Rose 2',
-            'Rovastar - Oozing Resistance',
-            'Zylot - Star Ornament',
+            'Geiss - Reaction Diffusion 2', //gözeneklere hücrelere dalan
+            'Geiss - Thumb Drum', // mürekkep
+            'martin - acid wiring', // çember çizgi dalgalı
+            'martin - angel flight', // parıltılı aynalı oda
+            'martin - chain breaker', // havai fişek
+            'martin - disco mix 4', // neon koridorda süzül
+            // 'martin - fruit machine', // eski ama çok durgun dandik
+            'Flexi - alien fish pond', // balıklar
+            'Flexi - area 51', // 3d bir görsel içinde dönüyor
+            'Flexi - mindblob mix', // kırmızı mavili ebru sanatı gibi
+            '_Geiss - Artifact 01', // resim paletinde fırtına
+            'Rovastar - Oozing Resistance', // rgb ying yang
+            'Zylot - Star Ornament', // en bilinen 3 lü dönen içgen
           ];
 
           // KRITIK: Sadece güvenli preset'leri yükle
@@ -187,9 +185,9 @@ function Winamp({ onClose, onMinimize }) {
             .map(([name, preset]) => {
               try {
                 // Sadece güvenli listede olan preset'leri al
-                if (!safePresets.includes(name)) {
-                  return null;
-                }
+                // if (!safePresets.includes(name)) {
+                //   return null;
+                // }
 
                 console.log(`✅ Loading safe preset: ${name}`);
                 return {
@@ -235,11 +233,6 @@ function Winamp({ onClose, onMinimize }) {
       const elements = document.querySelectorAll(selector);
       elements.forEach(element => {
         if (element) {
-          element.style.position = 'fixed';
-          element.style.left = '450px';
-          element.style.top = '50px';
-          element.style.width = '800px'; // BOYUT EKLENDİ
-          element.style.height = '600px'; // BOYUT EKLENDİ
           element.style.zIndex = '1001';
           console.log('✅ Milkdrop window repositioned');
         }
@@ -252,11 +245,6 @@ function Winamp({ onClose, onMinimize }) {
       if (canvas.width > 200 && canvas.height > 150) {
         const parent = canvas.closest('.webamp-window') || canvas.parentElement;
         if (parent && !parent.querySelector('.webamp-main')) {
-          parent.style.position = 'fixed';
-          parent.style.left = '450px';
-          parent.style.top = '50px';
-          parent.style.width = '800px'; // BOYUT EKLENDİ
-          parent.style.height = '600px'; // BOYUT EKLENDİ
           parent.style.zIndex = '1001';
           console.log('✅ Canvas parent repositioned');
         }
@@ -280,10 +268,10 @@ function Winamp({ onClose, onMinimize }) {
       __initialWindowLayout: {
         main: { position: { x: 300, y: 0 } },
         equalizer: { position: { x: 300, y: 116 } },
-        playlist: { position: { x: 300, y: 220 }, size: [0, 6] },
+        playlist: { position: { x: 300, y: 232 }, size: [0, 6] },
         milkdrop: {
           position: { x: 575, y: 0 },
-          size: [4, 2],
+          size: [4, 8],
         },
       },
     });
