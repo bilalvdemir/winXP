@@ -350,7 +350,7 @@ function Winamp({ onClose, onMinimize }) {
       __initialWindowLayout: {
         main: { position: { x: 0, y: 0 } },
         equalizer: { position: { x: 0, y: 116 } },
-        playlist: { position: { x: 0, y: 232 }, size: [0, 6] },
+        playlist: { position: { x: 0, y: 232 }, size: [0, 8] },
         milkdrop: {
           position: { x: 275, y: 0 },
           size: [4, 8],
