@@ -45,6 +45,23 @@ function Icons({
   );
 }
 
+const getBrowserInfo = () => {
+  if (typeof window === 'undefined')
+    return { isSafari: false, isMobile: false };
+
+  const userAgent = window.navigator.userAgent;
+
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      userAgent,
+    ) ||
+    (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
+
+  return { isMobile };
+};
+
+const isMobile = getBrowserInfo().isMobile;
+
 function Icon({
   title,
   onMouseDown,
@@ -58,7 +75,12 @@ function Icon({
 }) {
   const ref = useRef(null);
   function _onMouseDown() {
-    onMouseDown(id);
+    if (isMobile) {
+      onDoubleClick(component, injectProps);
+      onMouseDown(id);
+    } else {
+      onMouseDown(id);
+    }
   }
   function _onDoubleClick() {
     onDoubleClick(component, injectProps);

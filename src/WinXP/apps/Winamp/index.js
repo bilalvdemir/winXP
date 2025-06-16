@@ -11,59 +11,141 @@ const KNOWN_PRESET_URLS_REGEXES = [
   /^https:\/\/archive\.org\/cors\/md_.*\.json$/,
   /^https:\/\/s3-us-east-2\.amazonaws\.com\/butterchurn-presets\/.*\.json$/,
 ];
+// Safari detection utility
+const isSafari = () => {
+  if (typeof window === 'undefined') return false;
 
-// localStorage wrapper - Custom event dispatch için
+  const userAgent = window.navigator.userAgent;
+  const isSafariUA =
+    /Safari/.test(userAgent) &&
+    !/Chrome/.test(userAgent) &&
+    !/Chromium/.test(userAgent);
+
+  return isSafariUA;
+};
+
+// Enhanced localStorage wrapper with Safari polling support
 const createStorageWrapper = () => {
+  if (typeof window === 'undefined') return;
+
   const originalSetItem = localStorage.setItem;
+  const isSafariBrowser = isSafari();
 
   localStorage.setItem = function(key, value) {
     const oldValue = this.getItem(key);
     originalSetItem.apply(this, arguments);
 
-    // Custom event dispatch et
+    // Custom event dispatch for all browsers
     window.dispatchEvent(
       new CustomEvent('localStorageChange', {
         detail: { key, newValue: value, oldValue },
       }),
     );
+
+    // Safari-specific: Also store in a temporary object for polling
+    if (isSafariBrowser) {
+      if (!window._safariLocalStorageCache) {
+        window._safariLocalStorageCache = {};
+      }
+      window._safariLocalStorageCache[key] = value;
+    }
   };
 };
+
+// Enhanced custom hook with Safari polling
+function useLocalStorageListener(key) {
+  const [value, setValue] = useState(() => localStorage.getItem(key));
+  const isSafariBrowser = isSafari();
+  const pollingIntervalRef = useRef(null);
+  const lastKnownValueRef = useRef(localStorage.getItem(key));
+
+  useEffect(() => {
+    // Standard event listeners for non-Safari browsers
+    const handleStorageChange = e => {
+      if (e.key === key) {
+        setValue(e.newValue);
+        lastKnownValueRef.current = e.newValue;
+      }
+    };
+
+    const handleCustomStorage = e => {
+      if (e.detail.key === key) {
+        setValue(e.detail.newValue);
+        lastKnownValueRef.current = e.detail.newValue;
+      }
+    };
+
+    // Safari polling mechanism
+    const startSafariPolling = () => {
+      if (!isSafariBrowser) return;
+
+      console.log(`🍎 Starting Safari localStorage polling for key: ${key}`);
+
+      pollingIntervalRef.current = setInterval(() => {
+        try {
+          console.log(
+            `🍎 Checking Safari localStorage polling for key: ${key}`,
+          );
+          const currentValue = localStorage.getItem(key);
+          const lastValue = lastKnownValueRef.current;
+
+          // Check if value has changed
+          if (currentValue !== lastValue) {
+            console.log(`🔄 Safari polling detected change for ${key}:`, {
+              old: lastValue,
+              new: currentValue,
+            });
+
+            setValue(currentValue);
+            lastKnownValueRef.current = currentValue;
+          }
+        } catch (error) {
+          console.error('Safari localStorage polling error:', error);
+        }
+      }, 1000); // 1000ms interval as requested
+    };
+
+    // Add event listeners
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('localStorageChange', handleCustomStorage);
+
+    // Start Safari polling if needed
+    if (isSafariBrowser) {
+      startSafariPolling();
+    }
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('localStorageChange', handleCustomStorage);
+
+      // Clean up Safari polling
+      if (pollingIntervalRef.current) {
+        console.log(`🛑 Stopping Safari localStorage polling for key: ${key}`);
+        clearInterval(pollingIntervalRef.current);
+        pollingIntervalRef.current = null;
+      }
+    };
+  }, [key, isSafariBrowser]);
+
+  // Update ref when value changes from external sources
+  useEffect(() => {
+    lastKnownValueRef.current = value;
+  }, [value]);
+
+  return value;
+}
 
 // App başlangıcında wrapper'ı initialize et
 if (typeof window !== 'undefined' && !window.storageWrapperInitialized) {
   createStorageWrapper();
   window.storageWrapperInitialized = true;
-}
 
-// Custom hook - optimize edilmiş versiyon
-function useLocalStorageListener(key) {
-  const [value, setValue] = useState(() => localStorage.getItem(key));
-
-  useEffect(() => {
-    // Cross-tab değişiklikler için storage event
-    const handleStorageChange = e => {
-      if (e.key === key) {
-        setValue(e.newValue);
-      }
-    };
-
-    // Aynı tab içi değişiklikler için custom event
-    const handleCustomStorage = e => {
-      if (e.detail.key === key) {
-        setValue(e.detail.newValue);
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    window.addEventListener('localStorageChange', handleCustomStorage);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('localStorageChange', handleCustomStorage);
-    };
-  }, [key]);
-
-  return value;
+  // Log Safari detection
+  if (isSafari()) {
+    console.log('🍎 Safari detected - localStorage polling enabled');
+  } else {
+    console.log('🌐 Non-Safari browser - using standard localStorage events');
+  }
 }
 
 function presetNameFromURL(url) {
