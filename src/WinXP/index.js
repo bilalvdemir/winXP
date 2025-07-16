@@ -372,6 +372,8 @@ function WinXP() {
       dispatch({ type: ADD_APP, payload: appSettings['Internet Explorer'] });
     else if (o === 'Minesweeper')
       dispatch({ type: ADD_APP, payload: appSettings.Minesweeper });
+    else if (o === 'SkiFree')
+      dispatch({ type: ADD_APP, payload: appSettings.SkiFree });
     else if (o === 'My Computer')
       dispatch({ type: ADD_APP, payload: appSettings['My Computer'] });
     else if (o === 'Notepad')

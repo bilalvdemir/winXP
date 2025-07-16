@@ -54,6 +54,7 @@ import narrator from 'assets/windowsIcons/narrator.ico';
 import pinball from 'assets/windowsIcons/pinball.png';
 import restore from 'assets/windowsIcons/restore.ico';
 import mine from 'assets/minesweeper/mine-icon.png';
+import skifree from 'assets/skifree/skifree-icon.png';
 
 export const MyRecentDocuments = [
   {
@@ -341,6 +342,11 @@ export const AllPrograms = [
         type: 'item',
         icon: mine,
         text: 'Minesweeper',
+      },
+      {
+        type: 'item',
+        icon: skifree,
+        text: 'SkiFree',
       },
       {
         type: 'item',

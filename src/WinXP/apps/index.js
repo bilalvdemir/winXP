@@ -5,9 +5,13 @@ import MyComputer from './MyComputer';
 import Notepad from './Notepad';
 import Winamp from './Winamp';
 import Paint from './Paint';
+import SkiFree from './SkiFree';
+import OyunKutusu from './OyunKutusu';
 import iePaper from 'assets/windowsIcons/ie-paper.png';
 import ie from 'assets/windowsIcons/ie.png';
 import mine from 'assets/minesweeper/mine-icon.png';
+import skifree from 'assets/skifree/skifree-icon.png';
+import oyunkutusu from 'assets/windowsIcons/freecell.png';
 import error from 'assets/windowsIcons/897(16x16).png';
 import computer from 'assets/windowsIcons/676(16x16).png';
 import computerLarge from 'assets/windowsIcons/676(32x32).png';
@@ -149,6 +153,20 @@ export const defaultIconState = [
     icon: computerLarge,
     title: 'Bilgisayarım',
     component: MyComputer,
+    isFocus: false,
+  },
+  {
+    id: 20,
+    icon: skifree,
+    title: 'SkiFree',
+    component: SkiFree,
+    isFocus: false,
+  },
+  {
+    id: 21,
+    icon: oyunkutusu,
+    title: 'Oyun Kutusu',
+    component: OyunKutusu,
     isFocus: false,
   },
   {
@@ -437,6 +455,53 @@ export const appSettings = {
     maximized: window.innerWidth < 800,
     multiInstance: true,
   },
+  SkiFree: {
+    header: {
+      icon: skifree,
+      title: 'SkiFree',
+    },
+    component: SkiFree,
+    defaultSize: {
+      width: 800,
+      height: 600,
+    },
+    defaultOffset: {
+      x: 200,
+      y: 50,
+    },
+    resizable: true,
+    minimized: false,
+    maximized: false,
+    multiInstance: false,
+  },
+  'Oyun Kutusu': {
+    header: {
+      icon: oyunkutusu,
+      title: 'Oyun Kutusu',
+    },
+    component: OyunKutusu,
+    defaultSize: {
+      width: 800,
+      height: 600,
+    },
+    defaultOffset: {
+      x: 220,
+      y: 70,
+    },
+    resizable: true,
+    minimized: false,
+    maximized: true,
+    multiInstance: false,
+  },
 };
 
-export { InternetExplorer, Minesweeper, ErrorBox, MyComputer, Notepad, Winamp };
+export {
+  InternetExplorer,
+  Minesweeper,
+  ErrorBox,
+  MyComputer,
+  Notepad,
+  Winamp,
+  SkiFree,
+  OyunKutusu,
+};
