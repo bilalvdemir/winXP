@@ -20,6 +20,9 @@ import AdventureIsland3Emulator from './AdventureIsland3Emulator';
 import AdventureIsland4Emulator from './AdventureIsland4Emulator';
 import KunioSoccerEmulator from './KunioSoccerEmulator';
 import BombermanEmulator from './BombermanEmulator';
+import PinballEmulator from './PinballEmulator';
+import HalfLifeEmulator from './HalfLifeEmulator';
+import HalfLife1Emulator from './HalfLife1Emulator';
 import iePaper from 'assets/windowsIcons/ie-paper.png';
 import ie from 'assets/windowsIcons/ie.png';
 import mine from 'assets/minesweeper/mine-icon.png';
@@ -38,6 +41,9 @@ import adventure3 from 'assets/images/hudsons-adventure-island-3.jpg';
 import adventure4 from 'assets/images/hudsons-adventure-island-4.jpg';
 import kuniosoccer from 'assets/images/kunio-kun-no-nekketsu-soccer-league.webp';
 import bomberman from 'assets/images/bomberman.png';
+import pinball from 'assets/images/3d-pinball.png';
+import halflife from 'assets/images/half-life.png';
+import halflife1 from 'assets/images/half-life.png'; // Using same Half-Life icon for both games
 import error from 'assets/windowsIcons/897(16x16).png';
 import computer from 'assets/windowsIcons/676(16x16).png';
 import computerLarge from 'assets/windowsIcons/676(32x32).png';
@@ -74,46 +80,6 @@ const genId = gen();
 const genIndex = gen();
 export const defaultAppState = [
   {
-    component: InternetExplorer,
-    header: {
-      title: 'Internet Explorer',
-      icon: iePaper,
-    },
-    defaultSize: {
-      width: 700,
-      height: 500,
-    },
-    defaultOffset: {
-      x: 130,
-      y: 20,
-    },
-    resizable: true,
-    minimized: false,
-    maximized: window.innerWidth < 800,
-    id: genId(),
-    zIndex: genIndex(),
-  },
-  {
-    component: Minesweeper,
-    header: {
-      title: 'Minesweeper',
-      icon: mine,
-    },
-    defaultSize: {
-      width: 0,
-      height: 0,
-    },
-    defaultOffset: {
-      x: 180,
-      y: 170,
-    },
-    resizable: false,
-    minimized: false,
-    maximized: false,
-    id: genId(),
-    zIndex: genIndex(),
-  },
-  {
     component: Winamp,
     header: {
       title: 'Winamp',
@@ -131,26 +97,6 @@ export const defaultAppState = [
     resizable: false,
     minimized: false,
     maximized: false,
-    id: genId(),
-    zIndex: genIndex(),
-  },
-  {
-    component: MyComputer,
-    header: {
-      title: 'My Computer',
-      icon: computer,
-    },
-    defaultSize: {
-      width: 660,
-      height: 500,
-    },
-    defaultOffset: {
-      x: 250,
-      y: 40,
-    },
-    resizable: true,
-    minimized: false,
-    maximized: window.innerWidth < 800,
     id: genId(),
     zIndex: genIndex(),
   },
@@ -179,111 +125,6 @@ export const defaultIconState = [
     icon: computerLarge,
     title: 'Bilgisayarım',
     component: MyComputer,
-    isFocus: false,
-  },
-  {
-    id: 20,
-    icon: skifree,
-    title: 'SkiFree',
-    component: SkiFree,
-    isFocus: false,
-  },
-  {
-    id: 21,
-    icon: oyunkutusu,
-    title: 'Oyun Kutusu',
-    component: OyunKutusu,
-    isFocus: false,
-  },
-  {
-    id: 23,
-    icon: tetris,
-    title: 'Tetris',
-    component: TetrisEmulator,
-    isFocus: false,
-  },
-  {
-    id: 24,
-    icon: snake,
-    title: 'Snake',
-    component: SnakeEmulator,
-    isFocus: false,
-  },
-  {
-    id: 25,
-    icon: marioemulator,
-    title: 'Mario',
-    component: MarioEmulator,
-    isFocus: false,
-  },
-  {
-    id: 26,
-    icon: pacman,
-    title: 'Pac-Man',
-    component: PacmanEmulator,
-    isFocus: false,
-  },
-  {
-    id: 27,
-    icon: contra,
-    title: 'Contra Attack',
-    component: ContraEmulator,
-    isFocus: false,
-  },
-  {
-    id: 28,
-    icon: battlecity,
-    title: 'Battle City',
-    component: BattleCityEmulator,
-    isFocus: false,
-  },
-  {
-    id: 29,
-    icon: basketball,
-    title: 'Street Basketball',
-    component: StreetBasketballEmulator,
-    isFocus: false,
-  },
-  {
-    id: 30,
-    icon: adventure1,
-    title: 'Adventure Island',
-    component: AdventureIsland1Emulator,
-    isFocus: false,
-  },
-  {
-    id: 31,
-    icon: adventure2,
-    title: 'Adventure Island II',
-    component: AdventureIsland2Emulator,
-    isFocus: false,
-  },
-  {
-    id: 32,
-    icon: adventure3,
-    title: 'Adventure Island III',
-    component: AdventureIsland3Emulator,
-    isFocus: false,
-  },
-  {
-    id: 33,
-    icon: adventure4,
-    title: 'Adventure Island IV',
-    component: AdventureIsland4Emulator,
-    isFocus: false,
-  },
-  {
-    id: 34,
-    icon: kuniosoccer,
-    title: 'Kunio Soccer',
-    component: KunioSoccerEmulator,
-    isFocus: false,
-  },
-  {
-    id: 35,
-    icon: bomberman,
-    title: 'Bomberman',
-    component: BombermanEmulator,
     isFocus: false,
   },
   {
@@ -432,6 +273,132 @@ export const defaultIconState = [
     component: Winamp,
     isFocus: false,
     injectProps: { skin: zaxon },
+  },
+  {
+    id: 20,
+    icon: skifree,
+    title: 'SkiFree',
+    component: SkiFree,
+    isFocus: false,
+  },
+  {
+    id: 21,
+    icon: oyunkutusu,
+    title: 'Oyun Kutusu',
+    component: OyunKutusu,
+    isFocus: false,
+  },
+  {
+    id: 23,
+    icon: tetris,
+    title: 'Tetris',
+    component: TetrisEmulator,
+    isFocus: false,
+  },
+  {
+    id: 24,
+    icon: snake,
+    title: 'Snake',
+    component: SnakeEmulator,
+    isFocus: false,
+  },
+  {
+    id: 25,
+    icon: marioemulator,
+    title: 'Mario',
+    component: MarioEmulator,
+    isFocus: false,
+  },
+  {
+    id: 26,
+    icon: pacman,
+    title: 'Pac-Man',
+    component: PacmanEmulator,
+    isFocus: false,
+  },
+  {
+    id: 27,
+    icon: contra,
+    title: 'Contra Attack',
+    component: ContraEmulator,
+    isFocus: false,
+  },
+  {
+    id: 28,
+    icon: battlecity,
+    title: 'Battle City',
+    component: BattleCityEmulator,
+    isFocus: false,
+  },
+  {
+    id: 29,
+    icon: basketball,
+    title: 'Street Basketball',
+    component: StreetBasketballEmulator,
+    isFocus: false,
+  },
+  {
+    id: 30,
+    icon: adventure1,
+    title: 'Adventure Island',
+    component: AdventureIsland1Emulator,
+    isFocus: false,
+  },
+  {
+    id: 31,
+    icon: adventure2,
+    title: 'Adventure Island II',
+    component: AdventureIsland2Emulator,
+    isFocus: false,
+  },
+  {
+    id: 32,
+    icon: adventure3,
+    title: 'Adventure Island III',
+    component: AdventureIsland3Emulator,
+    isFocus: false,
+  },
+  {
+    id: 33,
+    icon: adventure4,
+    title: 'Adventure Island IV',
+    component: AdventureIsland4Emulator,
+    isFocus: false,
+  },
+  {
+    id: 34,
+    icon: kuniosoccer,
+    title: 'Kunio Soccer',
+    component: KunioSoccerEmulator,
+    isFocus: false,
+  },
+  {
+    id: 35,
+    icon: bomberman,
+    title: 'Bomberman',
+    component: BombermanEmulator,
+    isFocus: false,
+  },
+  {
+    id: 36,
+    icon: pinball,
+    title: '3D Pinball',
+    component: PinballEmulator,
+    isFocus: false,
+  },
+  {
+    id: 37,
+    icon: halflife,
+    title: 'Half-Life',
+    component: HalfLifeEmulator,
+    isFocus: false,
+  },
+  {
+    id: 38,
+    icon: halflife1,
+    title: 'Half-Life 1',
+    component: HalfLife1Emulator,
+    isFocus: false,
   },
 ];
 
@@ -857,6 +824,63 @@ export const appSettings = {
     maximized: true,
     multiInstance: false,
   },
+  '3D Pinball': {
+    header: {
+      icon: pinball,
+      title: '3D Pinball Space Cadet (DOS)',
+    },
+    component: PinballEmulator,
+    defaultSize: {
+      width: 900,
+      height: 700,
+    },
+    defaultOffset: {
+      x: 520,
+      y: 370,
+    },
+    resizable: true,
+    minimized: false,
+    maximized: true,
+    multiInstance: false,
+  },
+  'Half-Life': {
+    header: {
+      icon: halflife,
+      title: 'Half-Life Deathmatch',
+    },
+    component: HalfLifeEmulator,
+    defaultSize: {
+      width: 900,
+      height: 700,
+    },
+    defaultOffset: {
+      x: 540,
+      y: 390,
+    },
+    resizable: true,
+    minimized: false,
+    maximized: true,
+    multiInstance: false,
+  },
+  'Half-Life 1': {
+    header: {
+      icon: halflife1,
+      title: 'Half-Life 1',
+    },
+    component: HalfLife1Emulator,
+    defaultSize: {
+      width: 900,
+      height: 700,
+    },
+    defaultOffset: {
+      x: 560,
+      y: 410,
+    },
+    resizable: true,
+    minimized: false,
+    maximized: true,
+    multiInstance: false,
+  },
 };
 
 export {
@@ -881,4 +905,7 @@ export {
   AdventureIsland4Emulator,
   KunioSoccerEmulator,
   BombermanEmulator,
+  PinballEmulator,
+  HalfLifeEmulator,
+  HalfLife1Emulator,
 };

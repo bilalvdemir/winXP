@@ -27,26 +27,9 @@
         height: 100%;
       }
 
-      .controls {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 10px;
-        border-radius: 5px;
-        font-size: 12px;
-        z-index: 1000;
-      }
     </style>
   </head>
   <body>
-    <div class="controls">
-      <strong
-        title="Ok tuşları: Hareket | Z: A düğmesi | X: B düğmesi | Enter: Start | Shift: Select"
-        >Kontroller</strong
-      >
-    </div>
 
     <div id="game-container">
       <div id="game"></div>
@@ -75,5 +58,6 @@
       });
     </script>
     <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+    <script src="./emulator-controls.js"></script>
   </body>
 </html>

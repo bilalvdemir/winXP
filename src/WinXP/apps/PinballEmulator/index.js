@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-function MarioEmulator() {
+function PinballEmulator() {
   const containerRef = useRef(null);
   const iframeRef = useRef(null);
 
@@ -33,8 +33,8 @@ function MarioEmulator() {
     }
   }, []);
 
-  // Public klasöründeki mario-emulator.html dosyasını kullan
-  const gameUrl = '/winamp-xp/mario-emulator.html';
+  // Public klasöründeki pinball-emulator.html dosyasını kullan
+  const gameUrl = '/winamp-xp/pinball-emulator.html';
 
   return (
     <Container ref={containerRef}>
@@ -42,20 +42,21 @@ function MarioEmulator() {
         <iframe
           ref={iframeRef}
           src={gameUrl}
-          title="Super Mario Bros NES Emulator"
+          title="3D Pinball Space Cadet - DOS Emulator"
           frameBorder="0"
           allowFullScreen
-          sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-downloads"
+          sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
           referrerPolicy="no-referrer"
           loading="lazy"
           importance="high"
-          allow="fullscreen; autoplay; microphone; camera; cross-origin-isolated"
+          allow="fullscreen"
           crossOrigin="anonymous"
         />
       </IframeContainer>
     </Container>
   );
 }
+
 const IframeContainer = styled.div`
   flex: 1;
   position: relative;
@@ -79,4 +80,4 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-export default MarioEmulator;
+export default PinballEmulator;

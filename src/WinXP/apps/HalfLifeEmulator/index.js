@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-function MarioEmulator() {
+function HalfLifeEmulator() {
   const containerRef = useRef(null);
   const iframeRef = useRef(null);
 
@@ -33,16 +33,19 @@ function MarioEmulator() {
     }
   }, []);
 
-  // Public klasöründeki mario-emulator.html dosyasını kullan
-  const gameUrl = '/winamp-xp/mario-emulator.html';
+  // Half-Life Deathmatch URL
+  const gameUrl = 'https://x8bitrain.github.io/webXash/';
 
   return (
     <Container ref={containerRef}>
+      <LoadingOverlay id="loading-overlay">
+        <LoadingText>Half-Life Deathmatch yükleniyor...</LoadingText>
+      </LoadingOverlay>
       <IframeContainer>
         <iframe
           ref={iframeRef}
           src={gameUrl}
-          title="Super Mario Bros NES Emulator"
+          title="Half-Life Deathmatch"
           frameBorder="0"
           allowFullScreen
           sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-downloads"
@@ -51,11 +54,37 @@ function MarioEmulator() {
           importance="high"
           allow="fullscreen; autoplay; microphone; camera; cross-origin-isolated"
           crossOrigin="anonymous"
+          onLoad={() => {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            if (loadingOverlay) {
+              loadingOverlay.style.display = 'none';
+            }
+          }}
         />
       </IframeContainer>
     </Container>
   );
 }
+
+const LoadingOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+`;
+
+const LoadingText = styled.div`
+  color: #fff;
+  font-size: 18px;
+  font-family: 'Tahoma', sans-serif;
+`;
+
 const IframeContainer = styled.div`
   flex: 1;
   position: relative;
@@ -74,9 +103,10 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #fff;
+  background: #000;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
-export default MarioEmulator;
+export default HalfLifeEmulator;
